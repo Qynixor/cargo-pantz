@@ -186,42 +186,37 @@
             margin: 0 auto;
         }
         
-        /* Product Grid with Hover Effect */
+        /* H&M Style Product Grid */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
             margin-bottom: 60px;
         }
         
         .product-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .product-image {
-            height: 250px;
-            overflow: hidden;
             position: relative;
         }
         
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s, opacity 0.5s;
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        /* Default state - show model wearing pants */
+        .product-image {
+            height: 480px;
+            overflow: hidden;
+            position: relative;
+            background: #f8f9fa;
+        }
+        
+        /* Full-body model images */
         .product-image .model-image {
             position: absolute;
             top: 0;
@@ -229,7 +224,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top center;
             opacity: 1;
+            transition: all 0.5s ease;
         }
         
         .product-image .pants-only {
@@ -238,34 +235,72 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            background: white;
+            padding: 20px;
         }
         
-        /* Hover state - show pants only */
+        /* Hover effects */
         .product-card:hover .model-image {
             opacity: 0;
+            transform: scale(1.05);
         }
         
         .product-card:hover .pants-only {
             opacity: 1;
+            transform: scale(1);
         }
         
+        /* Product info styling */
         .product-info {
-            padding: 20px;
+            padding: 25px;
+            text-align: center;
+            background: white;
+            position: relative;
+            z-index: 2;
         }
         
         .product-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
             color: var(--dark);
+            font-weight: 600;
         }
         
         .product-price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+        }
+        
+        .product-sizes {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Hover indicator */
+        .hover-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--dark);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+        }
+        
+        .product-card:hover .hover-indicator {
+            opacity: 1;
         }
         
         /* How to Order Section */
@@ -498,6 +533,21 @@
             .social-icons {
                 margin-top: 15px;
             }
+            
+            .product-image {
+                height: 400px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-image {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -539,55 +589,74 @@
     <section id="products">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Products</h2>
-                <p>Hover over products to see the pants details</p>
+                <h2>Featured Collection</h2>
+                <p>Hover over products to see detailed views</p>
             </div>
             <div class="product-grid">
+                <!-- Product 1 -->
                 <div class="product-card">
+                    <div class="hover-indicator">
+                        <i class="fas fa-search"></i> View Details
+                    </div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classic Cargo Pants" class="model-image">
-                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classic Cargo Pants Detail" class="pants-only">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Classic Cargo Pants" class="model-image">
+                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Classic Cargo Pants Detail" class="pants-only">
                     </div>
                     <div class="product-info">
                         <h3>Classic Cargo Pants</h3>
                         <div class="product-price">$35.99</div>
-                        <p>Sizes: S, M, L, XL</p>
+                        <p class="product-sizes">Sizes: S, M, L, XL</p>
                         <a href="https://wa.me/256xxxxxxxxx?text=Hi! I'm interested in the Classic Cargo Pants" class="btn" target="_blank">Buy on WhatsApp</a>
                     </div>
                 </div>
+
+                <!-- Product 2 -->
                 <div class="product-card">
+                    <div class="hover-indicator">
+                        <i class="fas fa-search"></i> View Details
+                    </div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tactical Cargo Pants" class="model-image">
-                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tactical Cargo Pants Detail" class="pants-only">
+                        <img src="https://images.unsplash.com/photo-1506629905607-e48b0e67d879?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Tactical Cargo Pants" class="model-image">
+                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Tactical Cargo Pants Detail" class="pants-only">
                     </div>
                     <div class="product-info">
                         <h3>Tactical Cargo Pants</h3>
                         <div class="product-price">$42.99</div>
-                        <p>Sizes: S, M, L, XL, XXL</p>
+                        <p class="product-sizes">Sizes: S, M, L, XL, XXL</p>
                         <a href="https://wa.me/256xxxxxxxxx?text=Hi! I'm interested in the Tactical Cargo Pants" class="btn" target="_blank">Buy on WhatsApp</a>
                     </div>
                 </div>
+
+                <!-- Product 3 -->
                 <div class="product-card">
+                    <div class="hover-indicator">
+                        <i class="fas fa-search"></i> View Details
+                    </div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Urban Cargo Pants" class="model-image">
-                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Urban Cargo Pants Detail" class="pants-only">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=736&q=80" alt="Urban Cargo Pants" class="model-image">
+                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Urban Cargo Pants Detail" class="pants-only">
                     </div>
                     <div class="product-info">
                         <h3>Urban Cargo Pants</h3>
                         <div class="product-price">$38.99</div>
-                        <p>Sizes: S, M, L, XL</p>
+                        <p class="product-sizes">Sizes: S, M, L, XL</p>
                         <a href="https://wa.me/256xxxxxxxxx?text=Hi! I'm interested in the Urban Cargo Pants" class="btn" target="_blank">Buy on WhatsApp</a>
                     </div>
                 </div>
+
+                <!-- Product 4 -->
                 <div class="product-card">
+                    <div class="hover-indicator">
+                        <i class="fas fa-search"></i> View Details
+                    </div>
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Slim Fit Cargo Pants" class="model-image">
-                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Slim Fit Cargo Pants Detail" class="pants-only">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Slim Fit Cargo Pants" class="model-image">
+                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Slim Fit Cargo Pants Detail" class="pants-only">
                     </div>
                     <div class="product-info">
                         <h3>Slim Fit Cargo Pants</h3>
                         <div class="product-price">$39.99</div>
-                        <p>Sizes: S, M, L</p>
+                        <p class="product-sizes">Sizes: S, M, L</p>
                         <a href="https://wa.me/256xxxxxxxxx?text=Hi! I'm interested in the Slim Fit Cargo Pants" class="btn" target="_blank">Buy on WhatsApp</a>
                     </div>
                 </div>
@@ -797,6 +866,17 @@
             } else {
                 header.style.backgroundColor = 'white';
             }
+        });
+
+        // Add touch support for mobile hover effect
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.classList.add('hover');
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.classList.remove('hover');
+            });
         });
     </script>
 </body>
